@@ -9,12 +9,10 @@ class PokeForm extends Component {
     pokemonName: '',
   }
 
-  onHandleNameSearch = e => { 
+  onHandleNameSearch = e => {
     this.setState({ pokemonName: e.currentTarget.value.toLowerCase() })
-  
   }
-  
-
+    
   onSubmitForm = e => {
     e.preventDefault();
 
