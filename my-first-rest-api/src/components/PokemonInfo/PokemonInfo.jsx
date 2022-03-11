@@ -2,6 +2,8 @@ import { Component } from 'react';
 import PokemonFallBackView from '../PokemonErrorView/PokemonErrorView';
 import PokemonData from '../ViewPokemonData/PokemonData';
 
+import PendingPokemon from '../PokemoPendinfg/Pending';
+
 class PokemonInfo extends Component {
 
   state = {
@@ -32,7 +34,7 @@ class PokemonInfo extends Component {
           })
           .then(pokemon => this.setState({ pokemon,status:'resolve' }))
           .catch(error => this.setState({ error,status:'rejected' }))
-      },250)
+      },1000)
      };
   }
   render() { 
@@ -44,7 +46,7 @@ class PokemonInfo extends Component {
     }
 
     if (status === 'pending') { 
-      return <div>Загружаем...</div>
+      return <PendingPokemon pokemonName={pokemonName}/>
     }
 
       if (status === 'rejected') { 
@@ -57,20 +59,20 @@ class PokemonInfo extends Component {
       return <PokemonData pokemon={pokemon}/>
     }
     
-    return (
-      <div>
-        {error && <h2>{error.message}</h2>}
-        {/* {isLoading && <div>Загружаем...</div>} */}
-        {!pokemonName && <div>Введите имя покемона.</div>}
-        {pokemon && (<div>
-          <img src={pokemon.sprites.other['official-artwork'].front_default} alt={pokemon.name} width='250' height='250' />
-          <p>Name: {pokemon.name}</p>
-          <p>Order:{pokemon.order}</p>
-          <p>Height: {pokemon.height}</p>
-          <p>Weight: {pokemon.weight}</p>
-        </div>)}
-      </div>
-    );
+    // return (
+    //   <div>
+    //     {error && <h2>{error.message}</h2>}
+    //     {/* {isLoading && <div>Загружаем...</div>} */}
+    //     {!pokemonName && <div>Введите имя покемона.</div>}
+    //     {pokemon && (<div>
+    //       <img src={pokemon.sprites.other['official-artwork'].front_default} alt={pokemon.name} width='250' height='250' />
+    //       <p>Name: {pokemon.name}</p>
+    //       <p>Order:{pokemon.order}</p>
+    //       <p>Height: {pokemon.height}</p>
+    //       <p>Weight: {pokemon.weight}</p>
+    //     </div>)}
+    //   </div>
+    // );
   }
 }
 export default PokemonInfo;
